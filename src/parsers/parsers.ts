@@ -52,6 +52,7 @@ import { JutgeProblemParser } from './problem/JutgeProblemParser';
 import { KattisProblemParser } from './problem/KattisProblemParser';
 import { LightOJProblemParser } from './problem/LightOJProblemParser';
 import { MSKInformaticsProblemParser } from './problem/MSKInformaticsProblemParser';
+import { NowCoderProblemParser } from './problem/NowCoderProblemParser';
 import { OmegaUpProblemParser } from './problem/OmegaUpProblemParser';
 import { PandaOnlineJudgeProblemParser } from './problem/PandaOnlineJudgeProblemParser';
 import { PEGJudgeProblemParser } from './problem/PEGJudgeProblemParser';
@@ -142,6 +143,8 @@ export const parsers: Parser[] = [
   new LightOJContestParser(),
 
   new MSKInformaticsProblemParser(),
+
+  new NowCoderProblemParser(),
 
   new OldGoogleCodeJamContestParser(),
 
