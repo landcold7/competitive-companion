@@ -1,3 +1,12 @@
+# 2.9.1 - November 12th, 2019
+- Added the activeTab permission so the extension only has access to a tab when the extension is invoked by clicking the page action
+
+# 2.9.0 - November 12th, 2019
+- Added support for CodeMarshal (thanks [@NAbdulla1](https://github.com/NAbdulla1))
+
+# 2.8.5 - September 23rd, 2019
+- Added support for problems and contests hosted on *.codeforces.com subdomains
+
 # 2.8.4 - September 19th, 2019
 - Fixed the Toph parser
 

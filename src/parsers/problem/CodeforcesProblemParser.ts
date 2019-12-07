@@ -1,23 +1,27 @@
 import { Sendable } from '../../models/Sendable';
 import { TaskBuilder } from '../../models/TaskBuilder';
-import { htmlToElement } from '../../utils/dom';
+import { decodeHtml, htmlToElement } from '../../utils/dom';
 import { Parser } from '../Parser';
 
 export class CodeforcesProblemParser extends Parser {
   public getMatchPatterns(): string[] {
-    return [
-      'http://codeforces.com/contest/*/problem/*',
+    const patterns: string[] = [];
+
+    [
       'https://codeforces.com/contest/*/problem/*',
-      'http://codeforces.com/problemset/problem/*/*',
       'https://codeforces.com/problemset/problem/*/*',
-      'http://codeforces.com/gym/*/problem/*',
       'https://codeforces.com/gym/*/problem/*',
-      'http://codeforces.com/group/*/contest/*/problem/*',
       'https://codeforces.com/group/*/contest/*/problem/*',
-      'http://codeforces.com/problemsets/acmsguru/problem/*/*',
       'https://codeforces.com/problemsets/acmsguru/problem/*/*',
       'https://codeforces.com/contest/*/submission/*',
-    ];
+    ].forEach(pattern => {
+      patterns.push(pattern);
+      patterns.push(pattern.replace('https://', 'http://'));
+      patterns.push(pattern.replace('https://codeforces.com', 'https://*.codeforces.com'));
+      patterns.push(pattern.replace('https://codeforces.com', 'http://*.codeforces.com'));
+    });
+
+    return patterns;
   }
 
   public async parse(url: string, html: string): Promise<Sendable> {
@@ -84,8 +88,8 @@ export class CodeforcesProblemParser extends Parser {
     const outputs = elem.querySelectorAll('.output pre');
 
     for (let i = 0; i < inputs.length && i < outputs.length; i++) {
-      const input = this.decodeHtml(inputs[i].innerHTML);
-      const output = this.decodeHtml(outputs[i].innerHTML);
+      const input = decodeHtml(inputs[i].innerHTML);
+      const output = decodeHtml(outputs[i].innerHTML);
 
       task.addTest(input, output);
     }
